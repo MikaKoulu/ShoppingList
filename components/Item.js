@@ -6,9 +6,13 @@ const Item = (props) => {
     return (
         <View style={style.item}>
             <View style={style.itemLeft}>
+                <Text style={style.itemText}>{props.text}</Text>
+            </View>
+            <View style={style.itemRight}>
                 <TouchableOpacity style={style.circle}>
                 </TouchableOpacity>
-                <Text style={style.itemText}>{props.text}</Text>
+                <TouchableOpacity style={style.circle}>
+                </TouchableOpacity>
             </View>
         </View>
 
@@ -16,29 +20,37 @@ const Item = (props) => {
 }
 
 const style = StyleSheet.create({
-    item: { 
-    backgroundColor:  "white",
-    padding: 15,
-    borderRadius: 20,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 20,
-},
+    item: {
+        backgroundColor: "white",
+        padding: 15,
+        borderRadius: 20,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-around",
+        marginBottom: 20,
+    },
     itemLeft: {
         flexDirection: "row",
         alignItems: "center",
         flexWrap: "wrap"
     },
     circle: {
-        width: 30,
-        height: 30,
-        backgroundColor: "blue",
-        opacity: 0.3,
+        width: 60,
+        height: 40,
+        backgroundColor: "grey",
+        opacity: 0.4,
         borderRadius: 20,
-        marginRight: 15,
+        alignItems: "flex-end",
+        padding: 20,
+        marginLeft: 20,
     },
-    itemText: {},
+    itemText: {
+    },
+    itemRight: {
+        flexDirection: "row-reverse",
+        alignItems: "center",
+        flexWrap: "wrap"
+    },
 });
 
 export default Item;
