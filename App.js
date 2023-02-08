@@ -24,45 +24,49 @@ export default function App() {
 
   const completeItem = (index) => {
     let itemsCopy = [...taskItems];
-    itemsCopy.splice(index,1);
+    itemsCopy.splice(index, 1);
     setTaskItems(itemsCopy);
   }
 
   return (
     <ApolloProvider client={client}>
-    <View style={styles.container}>
-      <View style={styles.listWrapper}>
-        <Text style={styles.Title}>Shopping List</Text>
-        <ScrollView>
-        <View style={styles.items}>
-          {/* Item HERE */}
-          {
-            taskItems.map((item, index) => {
-              return(
-                <TouchableOpacity key={index} onPress={() => completeItem(index)}>
-                  <Item  text={item} />
-                </TouchableOpacity>
-              )
-            })
-          }
-        </View>
-        </ScrollView>
-      </View>
-
-      {/*Write item*/}
-      <KeyboardAvoidingView
-        behaviour={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.writeItemWrapper}
-      >
-        <TextInput style={styles.input} placeholder={"Write new item"} value={item} onChangeText={text => setItem(text)} />
-
-        <TouchableOpacity onPress={() => handleAddItem()}>
-          <View style={styles.addWrapper}>
-            <Text style={styles.addText}>+</Text>
+      <View style={styles.container}>
+        <View style={styles.listWrapper}>
+          <View style={styles.row}>
+          <Text style={styles.Title}>Shopping List</Text>
+          <TouchableOpacity style={styles.Menu}></TouchableOpacity>
+          <TouchableOpacity style={styles.Menu}></TouchableOpacity>
           </View>
-        </TouchableOpacity>
-      </KeyboardAvoidingView>
-    </View>
+          <ScrollView>
+            <View style={styles.items}>
+              {/* Item HERE */}
+              {
+                taskItems.map((item, index) => {
+                  return (
+                    <TouchableOpacity key={index} onPress={() => completeItem(index)}>
+                      <Item text={item} />
+                    </TouchableOpacity>
+                  )
+                })
+              }
+            </View>
+          </ScrollView>
+        </View>
+
+        {/*Write item*/}
+        <KeyboardAvoidingView
+          behaviour={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.writeItemWrapper}
+        >
+          <TextInput style={styles.input} placeholder={"Write new item"} value={item} onChangeText={text => setItem(text)} />
+
+          <TouchableOpacity onPress={() => handleAddItem()}>
+            <View style={styles.addWrapper}>
+              <Text style={styles.addText}>+</Text>
+            </View>
+          </TouchableOpacity>
+        </KeyboardAvoidingView>
+      </View>
     </ApolloProvider>
   );
 }
@@ -72,6 +76,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#eef7cf',
 
+  },
+  row: {
+    flexDirection: 'row',
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "space-around",
+    paddingBottom: 20,
   },
   listWrapper: {
     paddingTop: 80,
@@ -113,4 +124,16 @@ const styles = StyleSheet.create({
 
   },
   addText: {},
+  Menu: {
+    width: 80,
+    height: 40,
+    backgroundColor: "white",
+    borderRadius: 60,
+    borderColor: "black",
+    borderWidth: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingLeft: 20,
+  },
+
 });
