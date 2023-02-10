@@ -10,6 +10,9 @@ const Item = (props) => {
             </View>
             <View style={style.itemRight}>
                 <TouchableOpacity style={style.circle}>
+                <View style={style.addWrapper}>
+              <Text style={style.addText}>Leipää</Text>
+            </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={style.circle}>
                 </TouchableOpacity>
@@ -50,7 +53,17 @@ const style = StyleSheet.create({
         flexDirection: "row-reverse",
         alignItems: "center",
         flexWrap: "wrap"
+    }, addWrapper: {
+        width: 60,
+        height: 60,
+        backgroundColor: "white",
+        borderRadius: 60,
+        justifyContent: 'center',
+        alignItems: "center",
+        borderColor: "black",
+        borderWidth: 2,
     },
+        addText: {},
 });
 
 export default Item;
