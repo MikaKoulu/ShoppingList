@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { AppRegistry } from 'react-native';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { useQuery, gql } from '@apollo/client';
 import React, { useState } from 'react';
 import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Item from './components/Item';
@@ -8,10 +9,9 @@ import Item from './components/Item';
 
 // Initialize Apollo Client
 const client = new ApolloClient({
-  uri: 'localhost:4000',
+  uri: 'localhost:4000/',
   cache: new InMemoryCache()
 });
-
 
 export default function App() {
   const [item, setItem] = useState();
@@ -27,15 +27,22 @@ export default function App() {
     itemsCopy.splice(index, 1);
     setTaskItems(itemsCopy);
   }
-
+  const TestQuery = gql`
+  query ExampleQuery {
+  books {
+    title
+    author
+  }
+}
+  `;
   return (
     <ApolloProvider client={client}>
       <View style={styles.container}>
         <View style={styles.listWrapper}>
           <View style={styles.row}>
-          <Text style={styles.Title}>Shopping List</Text>
-          <TouchableOpacity style={styles.Menu}></TouchableOpacity>
-          <TouchableOpacity style={styles.Menu}></TouchableOpacity>
+            <Text style={styles.Title}>Shopping List</Text>
+            <TouchableOpacity style={styles.Menu}></TouchableOpacity>
+            <TouchableOpacity style={styles.Menu}></TouchableOpacity>
           </View>
           <ScrollView>
             <View style={styles.items}>
@@ -68,6 +75,7 @@ export default function App() {
         </KeyboardAvoidingView>
       </View>
     </ApolloProvider>
+
   );
 }
 
