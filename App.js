@@ -5,6 +5,8 @@ import { useQuery, gql } from '@apollo/client';
 import React, { useState } from 'react';
 import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Item from './components/Item';
+import Register from './components/Register';
+import Login from './components/Login';
 
 
 // Initialize Apollo Client
@@ -41,8 +43,11 @@ export default function App() {
         <View style={styles.listWrapper}>
           <View style={styles.row}>
             <Text style={styles.Title}>Shopping List</Text>
-            <TouchableOpacity style={styles.Menu}></TouchableOpacity>
-            <TouchableOpacity style={styles.Menu}></TouchableOpacity>
+            <Text>                </Text>
+            <Register>
+            </Register>
+            <Login>
+            </Login>
           </View>
           <ScrollView>
             <View style={styles.items}>
@@ -87,9 +92,8 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    flexWrap: "wrap",
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     paddingBottom: 20,
   },
   listWrapper: {
@@ -132,16 +136,4 @@ const styles = StyleSheet.create({
 
   },
   addText: {},
-  Menu: {
-    width: 80,
-    height: 40,
-    backgroundColor: "white",
-    borderRadius: 60,
-    borderColor: "black",
-    borderWidth: 2,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingLeft: 20,
-  },
-
 });
