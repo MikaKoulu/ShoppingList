@@ -10,9 +10,6 @@ const Item = (props) => {
             </View>
             <View style={style.itemRight}>
                 <TouchableOpacity style={style.circle}>
-                <View style={style.addWrapper}>
-              <Text style={style.addText}>Leipää</Text>
-            </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={style.circle}>
                 </TouchableOpacity>
