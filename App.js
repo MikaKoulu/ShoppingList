@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, FlatList } from 'react-native';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { useQuery, gql } from '@apollo/client';
 import React, { useState } from 'react';
@@ -7,11 +7,13 @@ import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text,
 import Item from './components/Item';
 import Register from './components/Register';
 import Login from './components/Login';
+import { TestQuery } from './gql/Query';
+import Handling from './gql/Handling';
 
 
 // Initialize Apollo Client
 const client = new ApolloClient({
-  uri: 'localhost:4000/',
+  uri: 'http://localhost:4000/',
   cache: new InMemoryCache()
 });
 
@@ -29,59 +31,54 @@ export default function App() {
     itemsCopy.splice(index, 1);
     setTaskItems(itemsCopy);
   }
-  const TestQuery = gql`
-  query ExampleQuery {
-  books {
-    title
-    author
-  }
-}
-  `;
-  return (
-    <ApolloProvider client={client}>
-      <View style={styles.container}>
-        <View style={styles.listWrapper}>
-          <View style={styles.row}>
-            <Text style={styles.Title}>Shopping List</Text>
-            <Text>                </Text>
-            <Register>
-            </Register>
-            <Login>
-            </Login>
-          </View>
-          <ScrollView>
-            <View style={styles.items}>
-              {/* Item HERE */}
-              {
-                taskItems.map((item, index) => {
-                  return (
-                    <TouchableOpacity key={index} onPress={() => completeItem(index)}>
-                      <Item text={item} />
-                    </TouchableOpacity>
-                  )
-                })
-              }
-            </View>
-          </ScrollView>
+
+
+return (
+  <ApolloProvider client={client}>
+    <View style={styles.container}>
+    <Handling/>
+      <View style={styles.listWrapper}>
+        <View style={styles.row}>
+          <Text style={styles.Title}>Shopping List</Text>
+          <Text>                </Text>
+          <Register>
+          </Register>
+          <Login>
+          </Login>
         </View>
-
-        {/*Write item*/}
-        <KeyboardAvoidingView
-          behaviour={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.writeItemWrapper}
-        >
-          <TextInput style={styles.input} placeholder={"Write new item"} value={item} onChangeText={text => setItem(text)} />
-
-          <TouchableOpacity onPress={() => handleAddItem()}>
-            <View style={styles.addWrapper}>
-              <Text style={styles.addText}>+</Text>
-            </View>
-          </TouchableOpacity>
-        </KeyboardAvoidingView>
+        <ScrollView>
+          <View style={styles.items}>
+            {/* Item HERE */}
+            {
+              taskItems.map((item, index) => {
+                return (
+                  <TouchableOpacity key={index} onPress={() => completeItem(index)}>
+                    <Item text={item} />
+                  </TouchableOpacity>
+                )
+              })
+            }
+          </View>
+        </ScrollView>
       </View>
-    </ApolloProvider>
 
-  );
+      {/*Write item*/}
+      <KeyboardAvoidingView
+        behaviour={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.writeItemWrapper}
+      >
+        <TextInput style={styles.input} placeholder={"Write new item"} value={item} onChangeText={text => setItem(text)} />
+
+        <TouchableOpacity onPress={() => handleAddItem()}>
+          <View style={styles.addWrapper}>
+            <Text style={styles.addText}>+</Text>
+          </View>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
+    </View>
+  </ApolloProvider>
+
+);
 }
 
 const styles = StyleSheet.create({
