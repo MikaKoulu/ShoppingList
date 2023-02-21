@@ -1,37 +1,40 @@
 import { useQuery } from "@apollo/client";
-import { Text, FlatList } from "react-native";
+import { Text, FlatList, Pressable, SafeAreaView } from "react-native";
 import { gql } from "@apollo/client";
 
-export default function Handling() {
-    //Handling queries example
 
-    const BooksQuery = gql`
-query Books {
-  books {
-    title
-  }
-}
-`
-    const { data, loading } = useQuery(booksQuery); //Execute
+const Get_Books = gql`
+    query Query {
+        books {
+          title
+        }
+      }
+`;
 
-    const TestItem = ({ books }) => {
+const Handling = props => {
+    const { loading, error, data } = useQuery(Get_Books);
+    console.log("Error: ", error)
+    console.log("data: ", data)
 
-        const { title } = books; //get the names
+    if (loading) return <Text>Loading...</Text>;
+    if (error) return <Text>Error loading books feed </Text>;
+    return (
+        <SafeAreaView>
+            <FlatList
+                data={data.books} //items will show if everything works here!
+                renderItem={({ item }) => 
+                (<Text numberOfLines={1} style={{ textAlign: "center", fontSize: 15, }}
+                > 
+                {item.title}
+                </Text>
+                )}
+/>
+                </SafeAreaView>
+    )
 
-        return (
-            <Text> {title}</Text>
-        );
-    }
-    if (loading) {
-        return <Text>Fetching data...</Text>
-    }
-
-    /*return(
-    <FlatList
-    data={data.books}
-    renderItem={({item}) => <TestItem books={item} />}
-    keyExtractor={(item, index) => index}
-    />
-    );
-    */
 };
+            Handling.navigationOptions = {
+                title: 'Handling'
+};
+
+            export default Handling;

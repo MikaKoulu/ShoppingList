@@ -7,7 +7,6 @@ import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text,
 import Item from './components/Item';
 import Register from './components/Register';
 import Login from './components/Login';
-import { TestQuery } from './gql/Query';
 import Handling from './gql/Handling';
 
 
@@ -36,7 +35,6 @@ export default function App() {
 return (
   <ApolloProvider client={client}>
     <View style={styles.container}>
-    <Handling/>
       <View style={styles.listWrapper}>
         <View style={styles.row}>
           <Text style={styles.Title}>Shopping List</Text>
@@ -46,6 +44,7 @@ return (
           <Login>
           </Login>
         </View>
+        <Handling/>
         <ScrollView>
           <View style={styles.items}>
             {/* Item HERE */}
