@@ -1,17 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, FlatList } from 'react-native';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { useQuery, gql } from '@apollo/client';
 import React, { useState } from 'react';
 import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Item from './components/Item';
+import Register from './components/Register';
+import Login from './components/Login';
+import Handling from './gql/Handling';
 
 
 // Initialize Apollo Client
 const client = new ApolloClient({
-  uri: 'localhost:4000',
+  uri: 'http://localhost:4000/',
   cache: new InMemoryCache()
 });
-
 
 export default function App() {
   const [item, setItem] = useState();
@@ -24,28 +27,37 @@ export default function App() {
 
   const completeItem = (index) => {
     let itemsCopy = [...taskItems];
-    itemsCopy.splice(index,1);
+    itemsCopy.splice(index, 1);
     setTaskItems(itemsCopy);
   }
 
-  return (
-    <ApolloProvider client={client}>
+
+return (
+  <ApolloProvider client={client}>
     <View style={styles.container}>
       <View style={styles.listWrapper}>
-        <Text style={styles.Title}>Shopping List</Text>
-        <ScrollView>
-        <View style={styles.items}>
-          {/* Item HERE */}
-          {
-            taskItems.map((item, index) => {
-              return(
-                <TouchableOpacity key={index} onPress={() => completeItem(index)}>
-                  <Item  text={item} />
-                </TouchableOpacity>
-              )
-            })
-          }
+        <View style={styles.row}>
+          <Text style={styles.Title}>Shopping List</Text>
+          <Text>                </Text>
+          <Register>
+          </Register>
+          <Login>
+          </Login>
         </View>
+        <Handling/>
+        <ScrollView>
+          <View style={styles.items}>
+            {/* Item HERE */}
+            {
+              taskItems.map((item, index) => {
+                return (
+                  <TouchableOpacity key={index} onPress={() => completeItem(index)}>
+                    <Item text={item} />
+                  </TouchableOpacity>
+                )
+              })
+            }
+          </View>
         </ScrollView>
       </View>
 
@@ -63,8 +75,9 @@ export default function App() {
         </TouchableOpacity>
       </KeyboardAvoidingView>
     </View>
-    </ApolloProvider>
-  );
+  </ApolloProvider>
+
+);
 }
 
 const styles = StyleSheet.create({
@@ -72,6 +85,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#eef7cf',
 
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    paddingBottom: 20,
   },
   listWrapper: {
     paddingTop: 80,
