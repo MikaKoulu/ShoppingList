@@ -2,7 +2,25 @@ import { useState } from "react";
 import React from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput, SafeAreaView} from 'react-native';
 
+
+const LOGIN = gql`
+    mutation loginUser($name: String!, $pass: String!) {
+  login(name: $name, pass: $pass) {
+    name,
+    id
+  }
+}
+  `
+  function loginUser() {
+    let input;
+    const [loginUser, {data, error, loading}] = useMutation(LOGIN);
+  }
+
 const Login = () => {
+    console.log("Error: ", error)
+    console.log("data: ", data)
+    if (loading) return <Text>Loading...</Text>;
+    if (error) return <Text>Error login </Text>;
     const [modalVisible, setModalVisible] = useState(false);
     return (
         <View style={styles.centeredView}>
