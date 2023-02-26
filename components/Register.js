@@ -7,6 +7,7 @@ import Login from "./Login";
 const Register = () => {
     const [modalVisible, setModalVisible] = useState(false);
     console.log(Login)
+    //Register need to add query functionality + to change when logged in.
     return (
         <View style={styles.centeredView}>
             <Modal

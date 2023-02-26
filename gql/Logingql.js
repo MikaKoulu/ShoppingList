@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-
+//Mutation for logging in
 export default graphql(
     gql`
       mutation SignUp($name: String!, $pass: String!) {

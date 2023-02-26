@@ -6,7 +6,7 @@ import { Picker } from "@react-native-picker/picker";
 
 
 
-
+//Query for login
 const LOGIN = gql`
     mutation loginUser($name: String!, $pass: String!) {
   login(name: $name, pass: $pass) {
@@ -18,6 +18,7 @@ const LOGIN = gql`
 
 
 const Login = () => {
+    //UseStates for setting login active and sending mutation
     const [modalVisible, setModalVisible] = useState(false);
     const [name, setName] = useState();
     const [pass, setPass] = useState();
@@ -35,8 +36,10 @@ const Login = () => {
         setLogin(false);
         console.log(Login)
     }
+    //loading or error loading depending on if it works or not.
     if (loading) return <Text>Loading...</Text>;
     if (error) return <Text>Error Logging </Text>;
+    //IF LOGIN TRUE EXECUTE THIS LINE WHERE THE BUTTON WILL LOG-OUT
     if (login == true) 
     return (
         <View style={styles.centeredView}>
@@ -60,6 +63,7 @@ const Login = () => {
                 </View>
             </View>
         </Modal>
+                {/*Buttons execute logout*/}
         <Pressable
             style={[styles.button, styles.buttonOpen]}
             onPress={() => setModalVisible(true)}
@@ -67,6 +71,7 @@ const Login = () => {
             <Text style={styles.textStyle}>LogOut</Text>
         </Pressable>
     </View>)
+    //if not logged in this model opens login window.
 return (
     <View style={styles.centeredView}>
         <Modal
@@ -96,6 +101,7 @@ return (
                             onChangeText={text => setPass(text)}
                         />
                     </SafeAreaView>
+                            {/*Buttons to login or cancel request*/}
                     <Pressable
                         onPress={() => HandleLogin()}
                         style={[styles.button, styles.buttonClose]}>
@@ -111,6 +117,7 @@ return (
                 </View>
             </View>
         </Modal>
+        {/*Buttons to open modal*/}
         <Pressable
             style={[styles.button, styles.buttonOpen]}
             onPress={() => setModalVisible(true)}>

@@ -5,6 +5,7 @@ import { View , StyleSheet, Text} from "react-native";
 import { useState } from "react";
 
 const State = () => {
+    //Tittle plus rendering register/login components.
     return(
         <View style={styles.row}>
             <Text style={styles.Title}>ShoppingList:</Text>

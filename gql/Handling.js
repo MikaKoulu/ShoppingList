@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { Text, FlatList, Pressable, SafeAreaView } from "react-native";
 import { gql } from "@apollo/client";
 
-
+//Test query handling to make sure connection to api working
 const Get_Books = gql`
     query Query {
         books {
