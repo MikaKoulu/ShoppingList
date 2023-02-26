@@ -148,13 +148,13 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     buttonOpen: {
-        backgroundColor: '#2196F3',
+        backgroundColor: '#abdbe3',
     },
     buttonClose: {
-        backgroundColor: '#2196F3',
+        backgroundColor: '#abdbe3',
     },
     textStyle: {
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold',
         textAlign: 'center',
     },
