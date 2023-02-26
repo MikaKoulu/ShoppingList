@@ -1,9 +1,12 @@
 import { useState } from "react";
 import React from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput, SafeAreaView} from 'react-native';
+import Login from "./Login";
+
 
 const Register = () => {
     const [modalVisible, setModalVisible] = useState(false);
+    console.log(Login)
     return (
         <View style={styles.centeredView}>
             <Modal

@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { gql, useMutation } from "@apollo/client";
 import React from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput, SafeAreaView} from 'react-native';
+import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput, SafeAreaView, Keyboard } from 'react-native';
+import { Picker } from "@react-native-picker/picker";
+
+
 
 
 const LOGIN = gql`
@@ -10,64 +14,111 @@ const LOGIN = gql`
     id
   }
 }
-  `
-  function loginUser() {
-    let input;
-    const [loginUser, {data, error, loading}] = useMutation(LOGIN);
-  }
+`
+
 
 const Login = () => {
-    console.log("Error: ", error)
-    console.log("data: ", data)
-    if (loading) return <Text>Loading...</Text>;
-    if (error) return <Text>Error login </Text>;
     const [modalVisible, setModalVisible] = useState(false);
+    const [name, setName] = useState();
+    const [pass, setPass] = useState();
+    const [login, setLogin] = useState(false);
+    const { data, error, loading } = useMutation(LOGIN);
+    console.log(login)
+    const HandleLogin = () => {
+        Keyboard.dismiss();
+        setName(name)
+        setPass(pass)
+        setLogin(true);
+        console.log(login)
+    }
+    const SignOutHandle = () => {
+        setLogin(false);
+        console.log(Login)
+    }
+    if (loading) return <Text>Loading...</Text>;
+    if (error) return <Text>Error Logging </Text>;
+    if (login == true) 
     return (
         <View style={styles.centeredView}>
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                    Alert.alert('Modal has been closed.');
-                    setModalVisible(!modalVisible);
-                }}>
-                <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Account name:</Text>
-                        <SafeAreaView>
-                            <TextInput
-                                style={styles.input}
-                            />
-                            </SafeAreaView>
-                            <Text style={styles.modalText}>Accounst password:</Text>
-                            <SafeAreaView>
-                            <TextInput
-                                style={styles.input}
-                            />
-                            </SafeAreaView>
-                            <Pressable
-                                style={[styles.button, styles.buttonClose]}>
-                                <Text style={styles.textStyle}>Login</Text>
-                            </Pressable>
-                            <Pressable
-                                style={[styles.button, styles.buttonClose]}
-                                onPress={() => setModalVisible(!modalVisible)}>
-                                <Text style={styles.textStyle}>Cancel</Text>
-                            </Pressable>
-                       
-                    </View>
-                </View>
-            </Modal>
-            <Pressable
-                style={[styles.button, styles.buttonOpen]}
-                onPress={() => setModalVisible(true)}>
-                <Text style={styles.textStyle}>Login</Text>
-            </Pressable>
-        </View>
-    );
-};
+        <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+                Alert.alert('Modal has been closed.');
+                setModalVisible(!modalVisible);
+            }}>
+            <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                    <Text style={styles.modalText}>LoginSuccess:</Text>
+                    <Pressable
+                        style={[styles.button, styles.buttonClose]}
+                        onPress={() => setModalVisible(!modalVisible)}>
+                        <Text style={styles.textStyle}>Close</Text>
+                    </Pressable>
 
+                </View>
+            </View>
+        </Modal>
+        <Pressable
+            style={[styles.button, styles.buttonOpen]}
+            onPress={() => setModalVisible(true)}
+            onPressIn={() => SignOutHandle()}>
+            <Text style={styles.textStyle}>LogOut</Text>
+        </Pressable>
+    </View>)
+return (
+    <View style={styles.centeredView}>
+        <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+                Alert.alert('Modal has been closed.');
+                setModalVisible(!modalVisible);
+            }}>
+            <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                    <Text style={styles.modalText}>Account name:</Text>
+                    <SafeAreaView>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Enter Account name"
+                            onChangeText={text => setName(text)}
+                        />
+                    </SafeAreaView>
+                    <Text style={styles.modalText}>Accounst password:</Text>
+                    <SafeAreaView>
+                        <TextInput
+                            secureTextEntry={true}
+                            style={styles.input}
+                            placeholder="Enter password"
+                            onChangeText={text => setPass(text)}
+                        />
+                    </SafeAreaView>
+                    <Pressable
+                        onPress={() => HandleLogin()}
+                        style={[styles.button, styles.buttonClose]}>
+                        <Text style={styles.textStyle}>Login</Text>
+
+                    </Pressable>
+                    <Pressable
+                        style={[styles.button, styles.buttonClose]}
+                        onPress={() => setModalVisible(!modalVisible)}>
+                        <Text style={styles.textStyle}>Cancel</Text>
+                    </Pressable>
+
+                </View>
+            </View>
+        </Modal>
+        <Pressable
+            style={[styles.button, styles.buttonOpen]}
+            onPress={() => setModalVisible(true)}>
+            <Text style={styles.textStyle}>Login</Text>
+        </Pressable>
+    </View>
+);
+        };
 const styles = StyleSheet.create({
     centeredView: {
         flex: 1,
@@ -118,7 +169,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 10,
         color: "black",
-      },
+    },
 });
 
 export default Login;

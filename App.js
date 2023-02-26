@@ -8,6 +8,7 @@ import Item from './components/Item';
 import Register from './components/Register';
 import Login from './components/Login';
 import Handling from './gql/Handling';
+import State from './components/State';
 
 
 // Initialize Apollo Client
@@ -36,14 +37,7 @@ return (
   <ApolloProvider client={client}>
     <View style={styles.container}>
       <View style={styles.listWrapper}>
-        <View style={styles.row}>
-          <Text style={styles.Title}>Shopping List</Text>
-          <Text>                </Text>
-          <Register>
-          </Register>
-          <Login>
-          </Login>
-        </View>
+       <State/>
         <Handling/>
         <ScrollView>
           <View style={styles.items}>
