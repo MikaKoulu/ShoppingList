@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, Touchable, TouchableOpacity } from "react-native";
 
 const Item = (props) => {
-
+//Creates item for shopping list
     return (
         <View style={style.item}>
             <View style={style.itemLeft}>

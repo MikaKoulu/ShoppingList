@@ -1,9 +1,13 @@
 import { useState } from "react";
 import React from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View, TextInput, SafeAreaView} from 'react-native';
+import Login from "./Login";
+
 
 const Register = () => {
     const [modalVisible, setModalVisible] = useState(false);
+    console.log(Login)
+    //Register need to add query functionality + to change when logged in.
     return (
         <View style={styles.centeredView}>
             <Modal
@@ -85,13 +89,13 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     buttonOpen: {
-        backgroundColor: '#2196F3',
+        backgroundColor: '#abdbe3',
     },
     buttonClose: {
-        backgroundColor: '#2196F3',
+        backgroundColor: '#abdbe3',
     },
     textStyle: {
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold',
         textAlign: 'center',
     },

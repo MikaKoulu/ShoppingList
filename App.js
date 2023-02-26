@@ -8,6 +8,7 @@ import Item from './components/Item';
 import Register from './components/Register';
 import Login from './components/Login';
 import Handling from './gql/Handling';
+import State from './components/State';
 
 
 // Initialize Apollo Client
@@ -17,6 +18,7 @@ const client = new ApolloClient({
 });
 
 export default function App() {
+  //Functionality for creating/adding items to shopping list.
   const [item, setItem] = useState();
   const [taskItems, setTaskItems] = useState([]);
   const handleAddItem = () => {
@@ -36,18 +38,11 @@ return (
   <ApolloProvider client={client}>
     <View style={styles.container}>
       <View style={styles.listWrapper}>
-        <View style={styles.row}>
-          <Text style={styles.Title}>Shopping List</Text>
-          <Text>                </Text>
-          <Register>
-          </Register>
-          <Login>
-          </Login>
-        </View>
-        <Handling/>
+            {/*Login/register buttons and tittle in State*/}
+       <State/>
         <ScrollView>
           <View style={styles.items}>
-            {/* Item HERE */}
+            {/* Items HERE */}
             {
               taskItems.map((item, index) => {
                 return (
