@@ -5,7 +5,6 @@ import { View , StyleSheet, Text} from "react-native";
 import { useState } from "react";
 
 const State = () => {
-    const [login, setLogin] = useState(false);
     return(
         <View style={styles.row}>
             <Text style={styles.Title}>ShoppingList:</Text>
