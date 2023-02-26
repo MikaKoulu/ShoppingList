@@ -1,18 +1,31 @@
 import React from "react";
-import { View, Text, StyleSheet, Touchable, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Touchable, TouchableOpacity, Keyboard, TextInput, SafeAreaView } from "react-native";
+
 
 const Item = (props) => {
-//Creates item for shopping list
+    //Creates item for shopping list
     return (
         <View style={style.item}>
             <View style={style.itemLeft}>
                 <Text style={style.itemText}>{props.text}</Text>
             </View>
             <View style={style.itemRight}>
-                <TouchableOpacity style={style.circle}>
-                </TouchableOpacity>
-                <TouchableOpacity style={style.circle}>
-                </TouchableOpacity>
+            <Text> € </Text>
+                <View style={style.input}>
+                <SafeAreaView>
+                    <TextInput style={style.TextArea} keyboardType="numeric"
+                        placeholder="price">
+                    </TextInput>
+                </SafeAreaView>
+                </View>
+                <View style={style.input}>
+                <SafeAreaView>
+                    <TextInput style={style.TextArea} keyboardType="numeric"
+                        placeholder="amount">
+                    </TextInput>
+                </SafeAreaView>
+                </View>
+                <Text> x: </Text>
             </View>
         </View>
 
@@ -30,26 +43,24 @@ const style = StyleSheet.create({
         marginBottom: 20,
     },
     itemLeft: {
-        flexDirection: "row",
+        flexDirection: "row-reverse",
         alignItems: "center",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
     },
-    circle: {
-        width: 60,
-        height: 40,
-        backgroundColor: "grey",
-        opacity: 0.4,
-        borderRadius: 20,
-        alignItems: "flex-end",
-        padding: 20,
-        marginLeft: 20,
+    TextArea: {
+
     },
     itemText: {
     },
     itemRight: {
         flexDirection: "row-reverse",
         alignItems: "center",
-        flexWrap: "wrap"
+        flexWrap: "wrap-reverse",
+        justifyContent:"space-around",
+        borderWidth: 1,
+        borderColor: "black",
+        borderRadius: 20,
+
     }, addWrapper: {
         width: 60,
         height: 60,
@@ -60,7 +71,15 @@ const style = StyleSheet.create({
         borderColor: "black",
         borderWidth: 2,
     },
-        addText: {},
+    addText: {},
+    input: {
+        borderRadius: 20,
+        margin: 4,
+        padding: 2,
+        backgroundColor: "#8cffe9",
+        fontStyle: "italic",
+        fontSize: 2,
+    },
 });
 
 export default Item;
